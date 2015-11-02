@@ -7,7 +7,7 @@ directories:
 * **code**, for scripts
 * **docs**, for supporting documentation, guides, how-tos, etc. (Melody)
 
-## Citation
+## citation
 
 If you make use of this data, please cite:
 
