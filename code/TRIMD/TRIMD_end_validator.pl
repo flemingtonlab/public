@@ -1,5 +1,14 @@
 #!/usr/bin/perl
 
+# TRIMD_end_validator.pl
+# Copyright (C) 2016 Flemington Lab
+
+#This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+#This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+
+#You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 #Accepts a SAM file using Iso-Seq fl data, a SAM file using Illumina data, and a bed file of annotated polyadenylated transcripts. Counts the number of non-clipped Iso-Seq reads with 3' ends at each genomic position and estimates consensus locations of clusters of 3' ends. Extracts Illumina reads containing apparent polyA tails and estimates consensus locations of clusters of polyadenylation sites. Output includes bedgraph files of all 3' ends, bed files of the weighted centers of end clusters, a sam file of reads with polyA tails and a bed file of Iso-Seq 3' ends supported by either the annotation or the Illumina data.
 
 #USAGE:

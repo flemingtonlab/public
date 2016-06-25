@@ -1,5 +1,14 @@
 #!/usr/bin/perl
 
+# TRIMD_junction_validator.pl
+# Copyright (C) 2016 Flemington Lab
+
+#This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+#This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+
+#You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 #Accepts a junctions files from GMAP/Iso-Seq (generated with the -f introns argument), an SJ.out.tab files from STAR/Illumina and an annotation file. Returns 3 bed files: one of SMRT introns, one of Illumina introns and one of introns detected by both methods. Annotation status of validated introns is noted.
 
 #USAGE:

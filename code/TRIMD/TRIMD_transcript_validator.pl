@@ -1,5 +1,18 @@
 #!usr/bin/perl
+
+# TRIMD_end_validator.pl
+# Copyright (C) 2016 Flemington Lab
+
+#This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+#This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+
+#You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 #Takes a sam file of Iso-Seq fl isoforms and compares them to a list of validated 5' ends, 3' ends and introns to create a list of validated transcript structures, which are compared to an annotation file.
+
+#USAGE:
+# perl <PATH/TRIMD_transcript_validator.pl> </PATH/Iso-Seq_sam_file> </PATH/validated_starts_file> </PATH/validated_ends_file> </PATH/validated_introns_file> </PATH/Annotation_bed_file>
 
 use warnings;
 use strict;

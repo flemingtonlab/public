@@ -1,5 +1,14 @@
 #!/usr/bin/perl
 
+# TRIMD_start_validator.pl
+# Copyright (C) 2016 Flemington Lab (except Paraclu portion)
+
+#This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+#This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+
+#You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 #Accepts a SAM file of Iso-Seq fl data, a SAM file of CAGE data, and a bed file of annotated polyadenylated transcripts. Counts the number of non-clipped Iso-Seq reads with 5' starts at each genomic position and estimates consensus locations of clusters of 5' starts. Uses Paraclu to identify clusters of 5' starts in the CAGE data. Output includes a bedgraph file of Iso-Seq 5' starts, a bed file of the weighted centers of Iso-Seq start clusters, a bedgraph file of CAGE tag 5' starts, a bed file of the weighted centers of Paraclu-identified CAGE 5' start clusters, and a bed file of Iso_seq 5' starts supported by the CAGE data, with their annotation status noted.
 
 #USAGE:
