@@ -521,12 +521,12 @@ foreach my $chrom (sort keys %chroms) {
         chomp($line);
         next if ($line =~ /^#/); #skips the header line
             my @cols = split("\t", $line);
-        next if ($cols[5] < $min_tags);
-        $length = $cols[3] - $cols[2] + 1;
-        if (($length >= $min_length) and ($length <= $max_length)) {
-            $dens = $cols[7] / $cols[6];
-            if ($dens >= $min_dens) {
-                next if (($cols[2] >= $prev_start) and ($cols[2] <= $prev_end));
+        next if ($cols[5] < $min_tags); #checks number of tags
+        $length = $cols[3] - $cols[2] + 1; #gets length of cluster
+        if (($length >= $min_length) and ($length <= $max_length)) { #checks if length is in specified range
+            $dens = $cols[7] / $cols[6]; #gets relative density
+            if ($dens >= $min_dens) { #if relative density is high enough:
+                next if (($cols[2] >= $prev_start) and ($cols[2] <= $prev_end)); #excludes subclusters
                 if ($dens < 100) { #keep everything one-based (like sam) for now; will convert to zero-based in next step
                     printf OUT "%s\t%d\t%d\t%d%s%.1f\t%d\t%s\n", $cols[0], $cols[2], $cols[3], $cols[5], ":", $dens, $cols[5], $cols[1];   #limits the density output to 1 decimal place, but doesn't change huge numbers to exponents
                 }
