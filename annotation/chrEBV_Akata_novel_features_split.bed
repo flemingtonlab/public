@@ -1,0 +1,4 @@
+track name="chrEBV_Akata novel split-spanning features”  description="features" visibility=full useScore=1
+chrEBV_Akata	70261	119708	BDLT14_c15145/1/1919	1	-	70261	119708	133,0,33	2	1393,530	0,48917
+chrEBV_Akata	107896	117629	BBRT7_c53618/3/2746	3	+	107896	117629	133,0,33	4	891,340,365,1152	0,1556,4878,8581
+chrEBV_Akata	71654	119178	novel_intron_-_1.IsoSeq_16.Ill	17	-
