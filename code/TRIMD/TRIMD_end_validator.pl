@@ -49,6 +49,7 @@ if ($answer eq "y") {
     $min_SMRT = 5;
     $min_ill = 1;
     $ann_dist = 10;
+    my $gsig_file;
 }
 else {
     print "Enter desired window for collapsing Iso-Seq 3' ends (e.g. 8): ";
