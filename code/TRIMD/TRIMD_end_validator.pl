@@ -626,14 +626,26 @@ foreach my $chrom (sort keys %chroms) {
     
     close(INF);
     
-    #compare ends in the altered SMRT ends file (that already has info about Illumina ends) with annotated ends
+    #compare ends in the altered SMRT ends file (that already has info about Illumina ends and genomic polyadenylation signals) with annotated ends
     
     open(INF, "<$SMRT_file.$chrom.ends.bed.illumina_gpolyasig_support.bed.temp" ) or die "couldn't open file";
     open(OUT, ">$SMRT_file.$chrom.validated_ends.bed");
     
-    print "Comparing Iso-Seq ends to annotated ends...\n";
+    if ($gsig_file) {
+        
+        open(INF, "<$SMRT_file.$viral_chr.ends.bed.illumina_gpolyasig_support.bed.temp" ) or die "couldn't open file";
+        
+        print "Comparing Iso-Seq ends to annotated ends...\n";
+        
+        print OUT "track type=bedDetail name=\"$SMRT_file.$viral_chr.validated_ends.bed\" description=\"validated ends supported by  at least $min_SMRT Iso-Seq read ends within $distance_between_SMRT_peaks bp, with an Illumina polyA site within $dist_SMRT_ill_d bp downstream or $dist_SMRT_ill_u bp upstream, or within 40 bp downstream of a polyadenylation signal, or within $ann_dist bp of an annotated end. Illumina polyA sites have at least $min_ill reads with $min_As As and $min_softclip mismatches, within $distance_between_ill_peaks bp of each other. From end_finder_sam_to_bed.pl\"\n";
+    }
+    else {
+        open(INF, "<$SMRT_file.$viral_chr.ends.bed.illumina_support.bed.temp" ) or die "couldn't open file";
     
-    #print OUT "track type=bedDetail name=\"$SMRT_file.$chrom.SMRT_ends.bed.illumina_support.bed\" description=\"validated ends supported by  at least $min_SMRT Iso-Seq read ends within $distance_between_SMRT_peaks bp, with an Illumina polyA site within $dist_SMRT_ill_d bp downstream or $dist_SMRT_ill_u bp upstream, or within $ann_dist bp of an annotated end. Illumina polyA sites have at least $min_ill reads with $min_As As and $min_softclip mismatches, within $distance_between_ill_peaks bp of each other. From end_finder_sam_to_bed.pl\"\n";
+        print "Comparing Iso-Seq ends to annotated ends...\n";
+    
+        #print OUT "track type=bedDetail name=\"$SMRT_file.$chrom.SMRT_ends.bed.illumina_support.bed\" description=\"validated ends supported by  at least $min_SMRT Iso-Seq read ends within $distance_between_SMRT_peaks bp, with an Illumina polyA site within $dist_SMRT_ill_d bp downstream or $dist_SMRT_ill_u bp upstream, or within $ann_dist bp of an annotated end. Illumina polyA sites have at least $min_ill reads with $min_As As and $min_softclip mismatches, within $distance_between_ill_peaks bp of each other. From end_finder_sam_to_bed.pl\"\n";
+    }
     
     my $annotated_found_by_SMRT = 0;
     my $novel_found_by_SMRT_ill = 0;
@@ -675,7 +687,7 @@ foreach my $chrom (sort keys %chroms) {
             }
         }
         if ($found_flag == 0) {
-            if ($SMRT_cols[3] =~ /.+IsoSeq_.+Ill/) {
+            if (($SMRT_cols[3] =~ /.+IsoSeq_.+Ill/)||($SMRT_cols[3] =~ /.+_gsig/)) {
                 print OUT "$SMRT_cols[0]\t$SMRT_cols[1]\t$SMRT_cols[2]\tnov_$SMRT_cols[5]_$SMRT_cols[3]\t$SMRT_cols[4]\t$SMRT_cols[5]\t$SMRT_cols[6]\n";
                 $novel_found_by_SMRT_ill++;
             }
