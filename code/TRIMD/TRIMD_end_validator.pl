@@ -516,6 +516,81 @@ foreach my $chrom (sort keys %chroms) {
     close(OUT);
     close(INF);
     
+    #####----------COMPARING TO GENOMIC POLYADENYLATION SIGNALS-------------######
+    
+    if ($gsig_file) {
+        
+        #get locations of polyadenylation signals:
+        open(INF, "<$gsig_file" ) or die "couldn't open file";
+        
+        print "Extracting Iso-Seq 3' ends within 40 bp downstream of a genomic polyadenylation signal...\n";
+        
+        my %features_gsig;
+        my $key_combo_gsig;
+        
+        while(my $line = <INF> ) {
+            chomp($line);
+            next if ($line =~ /^track/); #skips the track definition line
+            my @cols = split("\t", $line);
+            if ($cols[0] eq $chrom) {
+                if ($cols[5] eq "+") { #for each line in the polyadenylation signal bed file, creates a key for the hash combining coordinate and strand. Selects chrEnd for ends on the plus strand and chrStart for ends on the minus strand.
+                    $key_combo_gsig = "$cols[2]:$cols[5]";
+                }
+                if ($cols[5] eq "-") {
+                    $key_combo_gsig = "$cols[1]:$cols[5]";
+                }
+                $features_gsig{$key_combo_gsig} = $cols[4]; #enters a count value for the key into the hash
+            }
+        }
+        
+        close(INF);
+        
+        #then compare the SMRT ends in the temporary file (which already includes information about Illumina support) to the poly(A) signal locations in the hash.
+        open(INF, "<$SMRT_file.$chrom.ends.bed.illumina_support.bed.temp" ) or die "couldn't open file";
+        open(OUT, ">$SMRT_file.$chrom.ends.bed.illumina_gpolyasig_support.bed.temp");
+        
+        my $gsig_coord;
+        my $gsig_found = 0;
+        
+        while(my $line = <INF>) {
+            chomp($line);
+            next if ($line =~ /^track/); #skips any track definition line
+            my @SMRT_cols = split("\t", $line);
+            
+            if ($SMRT_cols[5] eq "+") { #sets boundaries for plus strand support
+                $lower_limit = $SMRT_cols[2] - 40;
+                $upper_limit = $SMRT_cols[2];
+            }
+            if ($SMRT_cols[5] eq "-") { #sets boundaries for minus strand support
+                $lower_limit = $SMRT_cols[1];
+                $upper_limit = $SMRT_cols[1] + 40;
+            }
+            
+            foreach my $key_combo_gsig (keys %features_gsig) {
+                my @gsig_cols = split(":", $key_combo_gsig);
+                
+                if (($SMRT_cols[5] eq $gsig_cols[1]) and ($gsig_cols[0] >= $lower_limit) and ($gsig_cols[0] <= $upper_limit)) {
+                    
+                    $gsig_found = 1;
+                    
+                }
+                
+            }
+            
+            if ($gsig_found == 1) {
+                print OUT $SMRT_cols[0], "\t", $SMRT_cols[1], "\t", $SMRT_cols[2], "\t", $SMRT_cols[3], "_gsig", "\t", $SMRT_cols[4], "\t", $SMRT_cols[5], "\t", $SMRT_cols[6], "\n";
+            }
+            
+            else { #includes SMRT ends that are not supported in this temporary file
+                print OUT "$line\n";
+            }
+            $gsig_found = 0;
+            
+        }
+        
+        close(OUT);
+        close(INF);
+    }
     
     #####----------COMPARING TO ANNOTATED ENDS-------------######
     open(INF, "<$ann_file" ) or die "couldn't open file";
@@ -553,7 +628,7 @@ foreach my $chrom (sort keys %chroms) {
     
     #compare ends in the altered SMRT ends file (that already has info about Illumina ends) with annotated ends
     
-    open(INF, "<$SMRT_file.$chrom.ends.bed.illumina_support.bed.temp" ) or die "couldn't open file";
+    open(INF, "<$SMRT_file.$chrom.ends.bed.illumina_gpolyasig_support.bed.temp" ) or die "couldn't open file";
     open(OUT, ">$SMRT_file.$chrom.validated_ends.bed");
     
     print "Comparing Iso-Seq ends to annotated ends...\n";
