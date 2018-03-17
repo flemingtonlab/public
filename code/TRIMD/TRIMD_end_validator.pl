@@ -34,6 +34,7 @@ my $dist_SMRT_ill_u;
 my $min_SMRT;
 my $min_ill;
 my $ann_dist;
+my $gsig_file;
 
 print "Use default parameters [y/n]? ";
 my $answer = <STDIN>;
