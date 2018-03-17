@@ -9,7 +9,7 @@
 
 #You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#Accepts a SAM file using Iso-Seq fl data, a SAM file using Illumina data, and a bed file of annotated polyadenylated transcripts. Counts the number of non-clipped Iso-Seq reads with 3' ends at each genomic position and estimates consensus locations of clusters of 3' ends. Extracts Illumina reads containing apparent polyA tails and estimates consensus locations of clusters of polyadenylation sites. Output includes bedgraph files of all 3' ends, bed files of the weighted centers of end clusters, a sam file of reads with polyA tails and a bed file of Iso-Seq 3' ends supported by either the annotation or the Illumina data.
+#Accepts a SAM file using Iso-Seq fl data, a SAM file using Illumina data, and a bed file of annotated polyadenylated transcripts. Counts the number of non-clipped Iso-Seq reads with 3' ends at each genomic position and estimates consensus locations of clusters of 3' ends. Extracts Illumina reads containing apparent polyA tails and estimates consensus locations of clusters of polyadenylation sites. Output includes bedgraph files of all 3' ends, bed files of the weighted centers of end clusters, a sam file of reads with polyA tails and a bed file of Iso-Seq 3' ends supported by annotation, Illumina data or a genomic polyadenylation sequence.
 
 #USAGE:
 # perl <PATH/TRIMD_end_validator.pl> </PATH/Iso-Seq_sam_file> </PATH/Illumina_sam_file> </PATH/Annotation_bed_file>
@@ -86,6 +86,10 @@ else {
     print "Enter maximum distance in bp from an annotated end to be called as 'annotated' (e.g. 10): ";
     $ann_dist = <STDIN>;
     chomp $ann_dist;
+    
+    print "Consider genomic polyadenylation signals? [n or /PATH/TO/BEDFILE]:\n";
+    $gsig_file = <STDIN>;
+    chomp $gsig_file;
 }
 
 print "================================================\n";
