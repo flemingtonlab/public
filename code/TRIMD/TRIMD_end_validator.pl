@@ -628,19 +628,18 @@ foreach my $chrom (sort keys %chroms) {
     
     #compare ends in the altered SMRT ends file (that already has info about Illumina ends and genomic polyadenylation signals) with annotated ends
     
-    open(INF, "<$SMRT_file.$chrom.ends.bed.illumina_gpolyasig_support.bed.temp" ) or die "couldn't open file";
     open(OUT, ">$SMRT_file.$chrom.validated_ends.bed");
     
     if ($gsig_file) {
         
-        open(INF, "<$SMRT_file.$viral_chr.ends.bed.illumina_gpolyasig_support.bed.temp" ) or die "couldn't open file";
+        open(INF, "<$SMRT_file.$chrom.ends.bed.illumina_gpolyasig_support.bed.temp" ) or die "couldn't open file";
         
         print "Comparing Iso-Seq ends to annotated ends...\n";
         
-        print OUT "track type=bedDetail name=\"$SMRT_file.$viral_chr.validated_ends.bed\" description=\"validated ends supported by  at least $min_SMRT Iso-Seq read ends within $distance_between_SMRT_peaks bp, with an Illumina polyA site within $dist_SMRT_ill_d bp downstream or $dist_SMRT_ill_u bp upstream, or within 40 bp downstream of a polyadenylation signal, or within $ann_dist bp of an annotated end. Illumina polyA sites have at least $min_ill reads with $min_As As and $min_softclip mismatches, within $distance_between_ill_peaks bp of each other. From end_finder_sam_to_bed.pl\"\n";
+        print OUT "track type=bedDetail name=\"$SMRT_file.$chrom.validated_ends.bed\" description=\"validated ends supported by  at least $min_SMRT Iso-Seq read ends within $distance_between_SMRT_peaks bp, with an Illumina polyA site within $dist_SMRT_ill_d bp downstream or $dist_SMRT_ill_u bp upstream, or within 40 bp downstream of a polyadenylation signal, or within $ann_dist bp of an annotated end. Illumina polyA sites have at least $min_ill reads with $min_As As and $min_softclip mismatches, within $distance_between_ill_peaks bp of each other. From end_finder_sam_to_bed.pl\"\n";
     }
     else {
-        open(INF, "<$SMRT_file.$viral_chr.ends.bed.illumina_support.bed.temp" ) or die "couldn't open file";
+        open(INF, "<$SMRT_file.$chrom.ends.bed.illumina_support.bed.temp" ) or die "couldn't open file";
     
         print "Comparing Iso-Seq ends to annotated ends...\n";
     
