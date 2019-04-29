@@ -1,5 +1,6 @@
 # TRIMD
 Transcriptome Resolution by Integration of Multi-platform Data
+## As of 2019, all TRIMD code will be maintained in the repository  https://github.com/flemingtonlab/TRIMD. 
 
 Scripts included:
 * TRIMD_start_validator.pl
@@ -84,7 +85,7 @@ OUTPUT
 USAGE: perl /PATH/TRIMD_junction_matcher.pl </PATH/SMRT_introns_file> </PATH/Illumina_SJ.out.tab_file> </PATH/transcript_annotation_bed_file> <coordinates_to_ignore_bed_file(optional)>
 ```
 
-Accepts a junctions files from GMAP/SMRT (generated with the -f introns argument) and an SJ.out.tab files from STAR/Illumina. 
+Accepts a junctions files from GMAP/SMRT (generated with the -f introns argument) and an SJ.out.tab files from STAR/Illumina.
 Returns 3 bed files: one of SMRT splice junctions, one of Illumina splice junctions and one of junctions detected by both methods. The coordinates in the output bed files correspond to the first and last bases of the introns. Optionally, splice junctions in repeat regions can be ignored by providing a bed file with the coordinates of those junctions.
 
 
@@ -232,7 +233,7 @@ You should have received a copy of the GNU General Public License along with thi
 
 ## PLEASE CITE
 
-O’Grady T, Wang X, Höner zu Bentrup K, Baddoo M, Concha M and Flemington EK (2016) Global transcript structure resolution of high gene density genomes through multi-platform data integration. Nucleic Acids Research _in press_.
+O’Grady T, Wang X, Höner zu Bentrup K, Baddoo M, Concha M and Flemington EK (2016) Global transcript structure resolution of high gene density genomes through multi-platform data integration. Nucleic Acids Research  44(18), e145-e145.
 
 and
 
