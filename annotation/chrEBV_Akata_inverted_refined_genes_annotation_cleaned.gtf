@@ -76,7 +76,7 @@ chrEBV_Akata_inverted	bed2gff	exon	40598	43339	1000	-	.	 gene_id "LF1_1"; transc
 chrEBV_Akata_inverted	bed2gff	exon	40598	44232	1000	-	.	 gene_id "BILF1_1"; transcript_id "BILF1_1"; exon_number "1";
 chrEBV_Akata_inverted	bed2gff	exon	42963	47876	1000	-	.	 gene_id "BALF5_1"; transcript_id "BALF5_1"; exon_number "1";
 chrEBV_Akata_inverted	bed2gff	exon	44338	44359	1000	+	.	 gene_id "ebv-miR-BART2-5p_1"; transcript_id "ebv-miR-BART2-5p_1"; exon_number "1";
-chrEBV_Akata_inverted	bed2gff	exon	44338	44361	1000	+	.	 gene_id "ebv-miR-BART2-3p_1"; transcript_id "ebv-miR-BART2-3p_1"; exon_number "1";
+chrEBV_Akata_inverted	bed2gff	exon	44374	44361	1000	+	.	 gene_id "ebv-miR-BART2-3p_1"; transcript_id "ebv-miR-BART2-3p_1"; exon_number "1";
 chrEBV_Akata_inverted	bed2gff	exon	47137	48325	1000	+	.	 gene_id "A73_1"; transcript_id "A73_1"; exon_number "1";
 chrEBV_Akata_inverted	bed2gff	exon	48434	48516	1000	+	.	 gene_id "A73_1"; transcript_id "A73_1"; exon_number "2";
 chrEBV_Akata_inverted	bed2gff	exon	50213	50339	1000	+	.	 gene_id "A73_1"; transcript_id "A73_1"; exon_number "3";
