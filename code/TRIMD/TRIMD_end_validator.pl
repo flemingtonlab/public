@@ -520,7 +520,7 @@ foreach my $chrom (sort keys %chroms) {
     
     #####----------COMPARING TO GENOMIC POLYADENYLATION SIGNALS-------------######
     
-    if ($gsig_file) {
+    if ($gsig_file ne "n") {
         
         #get locations of polyadenylation signals:
         open(INF, "<$gsig_file" ) or die "couldn't open file";
@@ -632,7 +632,7 @@ foreach my $chrom (sort keys %chroms) {
     
     open(OUT, ">$SMRT_file.$chrom.validated_ends.bed");
     
-    if ($gsig_file) {
+    if ($gsig_file ne "n") {
         
         open(INF, "<$SMRT_file.$chrom.ends.bed.illumina_gpolyasig_support.bed.temp" ) or die "couldn't open file";
         
